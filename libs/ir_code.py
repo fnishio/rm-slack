@@ -41,15 +41,13 @@ def discover():
 
 def dispatch(op, val):
     if (op == 'light'):
-        light_ext(op, val)
-    else:
-        send(codes[op][val])
+        light_ext(val)
 
 def send(code):
     data = bytearray.fromhex(code)
     devices[0].send_data(data)
 
-def light_ext(op, val):
+def light_ext(val):
     if (val == 'ext_on'):
         hour = datetime.now().time().hour
         print (hour)
@@ -57,4 +55,4 @@ def light_ext(op, val):
             val = 'fav'
         else:
             val = 'on'
-        send(codes[op][val])
+        send(codes['light'][val])
